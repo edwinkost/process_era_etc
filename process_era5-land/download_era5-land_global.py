@@ -320,8 +320,8 @@ def main():
               target = args.dir_download + '/' + var1 + vardir + "/ERA5-Land_%s_%04d%02d.nc" % (var2,year,month)
           else:
             target = args.dir_download + "/ERA5-Land_%s_%04d%02d.nc" % (var2,year,month)
-          params['year'] = [year,]
-          params['month'] = [month,]
+          params['year'] = [str(year),]
+          params['month'] = [str(month),]
           print(database,params,target)
           print(" \n")
           c.retrieve(database,params,target)
