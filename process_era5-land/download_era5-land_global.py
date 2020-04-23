@@ -28,6 +28,16 @@ def Temp ():
    global vardir
    vardir = "Temp"
 
+def temp_2m (),
+
+   params['variable']= ['2m_temperature']
+   print('2m_temperature')
+   print(params)
+   global var2
+   var2 = "temp_2m"
+   global vardir
+   vardir = "temp_2m"
+
 def Wind ():
 
    params['variable']= ['10m_u_component_of_wind','10m_v_component_of_wind',]
@@ -37,6 +47,26 @@ def Wind ():
    var2 = "10u10v"
    global vardir
    vardir = "Wind"
+
+def wind_u ():
+
+   params['variable']= ['10m_u_component_of_wind']
+   print('10m_u_component_of_wind')
+   print(params)
+   global var2
+   var2 = "10u"
+   global vardir
+   vardir = "10u"
+
+def wind_v ():
+
+   params['variable']= ['10m_v_component_of_wind']
+   print('10m_v_component_of_wind')
+   print(params)
+   global var2
+   var2 = "10v"
+   global vardir
+   vardir = "10v"
 
 def Sp ():
 
@@ -56,14 +86,14 @@ def Ssr ():
    global vardir
    vardir = "Snsr"
 
-def Tp ():
+def tp ():
 
    params['variable']= ['total_precipitation',]
-   print("Its Tp")
+   print('total_precipitation')
    global var2
-   var2 = "Tp"
+   var2 = "tp"
    global vardir
-   vardir = "Tpre"
+   vardir = "tpre"
 
 def Fa ():
 
@@ -73,6 +103,7 @@ def Fa ():
    var2 = "Fa"
    global vardir
    vardir = "Falb"
+
 
 def Default_case ():
 
@@ -91,12 +122,16 @@ def Default_case ():
 Variable_Dict = {
 
     "temp": Temp,
+    "temp_2m": temp_2m,
 
     "wind": Wind,
 
+    "wind_10m_u": wind_u,
+    "wind_10m_v": Wwnd_v,
+
     "sp": Sp,
 
-    "tp": Tp,
+    "tp": tp,
 
     "ssr": Ssr,
 
@@ -320,11 +355,14 @@ def main():
               target = args.dir_download + '/' + var1 + vardir + "/ERA5-Land_%s_%04d%02d.nc" % (var2,year,month)
           else:
             target = args.dir_download + "/ERA5-Land_%s_%04d%02d.nc" % (var2,year,month)
+
           month_2d = '%02d' % (month)
           params['month'] = [str(month_2d),]
-          params['year'] = [str(year),]
+          params['year']  = [str(year),]
+
           #~ params['month'] = str(month_2d)
           #~ params['year'] = str(year)
+
           print(database,params,target)
           print(" \n")
           c.retrieve(database,params,target)
