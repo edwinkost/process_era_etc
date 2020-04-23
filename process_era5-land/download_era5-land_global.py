@@ -345,7 +345,12 @@ def main():
      for month in list(range(args.monthStart, args.monthEnd + 1)):
           startDate = '%04d%02d%02d' % (year, month, 1)
           numberOfDays = calendar.monthrange(year, month)[1]
+
           params['day'] = ["{:02d}".format(i) for i in range(1,numberOfDays+1)]
+          
+          # - for testing
+          params['day'] = ["01", "02", "03"]
+
           lastDate = '%04d%02d%02d' % (year, month, numberOfDays)
           if args.update == 0:
             if any == 1:
