@@ -127,7 +127,7 @@ Variable_Dict = {
     "wind": Wind,
 
     "wind_10m_u": wind_u,
-    "wind_10m_v": Wwnd_v,
+    "wind_10m_v": wind_v,
 
     "sp": Sp,
 
