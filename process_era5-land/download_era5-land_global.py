@@ -330,8 +330,8 @@ def main():
   #~ params['area'] = [bb,]
   #~ #######################################################################################################
 
-#~ #The switch alternative
-  #~ Variable_Dict.get(args.variable,Default_case)()
+#The switch alternative
+  Variable_Dict.get(args.variable,Default_case)()
 
   if args.update == 0:
     cmd = "mkdir -p " + args.dir_download + '/' + var1 + vardir
