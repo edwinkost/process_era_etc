@@ -18,8 +18,8 @@ set -x
 
 # -year 2019, month 1 only
 #~ python download_era5-land_global.py /scratch/depfg/sutan101/era5-land_meteo/hourly/ temp_2m 2019 2019 1  1 0 &
-python download_era5-land_global.py /scratch/depfg/sutan101/era5-land_meteo/hourly/ wind_u  2019 2019 1  1 0 &
-python download_era5-land_global.py /scratch/depfg/sutan101/era5-land_meteo/hourly/ wind_v  2019 2019 1  1 0 &
+python download_era5-land_global.py /scratch/depfg/sutan101/era5-land_meteo/hourly/ wind_10m_u 2019 2019 1  1 0 &
+python download_era5-land_global.py /scratch/depfg/sutan101/era5-land_meteo/hourly/ wind_10m_v 2019 2019 1  1 0 &
 #~ python download_era5-land_global.py /scratch/depfg/sutan101/era5-land_meteo/hourly/ tp      2019 2019 1  1 0 &
 
 wait
