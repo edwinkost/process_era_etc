@@ -113,7 +113,7 @@ d=monthrange(int(params['year'][0]), 2)
 params['day'] = d[1]
 
 #~ # inactivate the following for global extent and use default resolution 
-params['area'] = ['0/28/-16/41',]
+#~ params['area'] = ['0/28/-16/41',]
 #~ params['grid'] = ['0.05/0.05',]
 
 #variable = ['10m_u_component_of_wind', '10m_v_component_of_wind', '2m_dewpoint_temperature',
