@@ -323,8 +323,8 @@ def main():
           month_2d = '%02d' % (month)
           params['month'] = [str(month_2d),]
           params['year'] = [str(year),]
-          params['month'] = str(month_2d)
-          params['year'] = str(year)
+          #~ params['month'] = str(month_2d)
+          #~ params['year'] = str(year)
           print(database,params,target)
           print(" \n")
           c.retrieve(database,params,target)
