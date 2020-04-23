@@ -23,4 +23,4 @@ c.retrieve(
         ],
         'format': 'netcdf',
     },
-    'download3.nc')
+    'download4.nc')
