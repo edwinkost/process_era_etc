@@ -348,8 +348,8 @@ def main():
 
           params['day'] = ["{:02d}".format(i) for i in range(1,numberOfDays+1)]
           
-          # - for testing
-          params['day'] = ["{:02d}".format(i) for i in range(1,3+1)]
+          #~ # - for testing
+          #~ params['day'] = ["{:02d}".format(i) for i in range(1,3+1)]
 
           lastDate = '%04d%02d%02d' % (year, month, numberOfDays)
           if args.update == 0:
