@@ -28,7 +28,7 @@ def Temp ():
    global vardir
    vardir = "Temp"
 
-def temp_2m (),
+def temp_2m ():
 
    params['variable']= ['2m_temperature']
    print('2m_temperature')
