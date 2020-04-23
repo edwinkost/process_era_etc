@@ -10,8 +10,7 @@ c.retrieve(
         ],
         'year': '2019',
         'month': '01',
-        'day': [
-            '01', '02',
+        'day': ["{:02d}".format(i) for i in range(1,31+1)]
         ],
         'time': [
             '00:00', '01:00', '02:00',
