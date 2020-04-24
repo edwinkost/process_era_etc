@@ -23,7 +23,7 @@ mkdir -p ${OUTPUT_FOLDER}
 HOURLY_SOURCE_DIR=${MAIN_HOURLY_SOURCE_DIR}/Variable_tpre
 # - daily total precipitation, NOTE: using daymax (as hourly source data are accumulative on each day)
 DAILY_OUTPUT_FILE=${OUTPUT_FOLDER}/tanzania_era5-land_daily_total-preci_${YEAR}.nc
-cdo -L -b F64 -settime,00:00:00 -setunit,m.day-1 -daymax -selyear,${YEAR}/${YEAR_PLUS_1} -shifttime,-25min -selvar,tp -mergetime ${HOURLY_SOURCE_DIR}/*${YEAR}*.nc ${HOURLY_SOURCE_DIR}/*${YEAR_PLUS_1}01.nc ${DAILY_OUTPUT_FILE} 
+cdo -L -b F64 -settime,00:00:00 -setunit,m.day-1 -daymax -selyear,${YEAR} -shifttime,-25min -selvar,tp -mergetime ${HOURLY_SOURCE_DIR}/*${YEAR}*.nc ${HOURLY_SOURCE_DIR}/*${YEAR_PLUS_1}01.nc ${DAILY_OUTPUT_FILE} 
 
 # monthly tp, total precipitation
 MONTHLY_UNIT="m.month-1"
