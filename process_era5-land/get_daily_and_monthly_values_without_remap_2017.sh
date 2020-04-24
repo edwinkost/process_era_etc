@@ -12,12 +12,15 @@ MAIN_HOURLY_SOURCE_DIR="/scratch-shared/edwinsu/era5-land_meteo/hourly/"
 #~ dr-xr-xr-x 2 edwinsu edwinsu  12K Apr 24 06:12 Variable_temp_2m
 #~ dr-xr-xr-x 2 edwinsu edwinsu 4.0K Apr 24 06:20 Variable_tpre
 
+
 YEAR=2017
 YEAR_PLUS_1=2018
+
 
 OUTPUT_FOLDER="/scratch-shared/edwinsu/era5-land_meteo/without_remapcon/"
 OUTPUT_FOLDER=${OUTPUT_FOLDER}/${YEAR}
 mkdir -p ${OUTPUT_FOLDER}
+
 
 # daily tp, total precipitation
 HOURLY_SOURCE_DIR=${MAIN_HOURLY_SOURCE_DIR}/Variable_tpre
@@ -30,6 +33,20 @@ MONTHLY_UNIT="m.month-1"
 CDOMON_OPERA="monsum"
 MONTH_OUTPUT_FILE=${OUTPUT_FOLDER}/tanzania_era5-land_monthly_total-preci_${YEAR}.nc
 CDO_TIMESTAT_DATE='last' cdo -L -settime,00:00:00 -setunit,${MONTHLY_UNIT} -${CDOMON_OPERA} ${DAILY_OUTPUT_FILE} ${MONTH_OUTPUT_FILE} 
+
+
+# daily temp_2m
+HOURLY_SOURCE_DIR=${MAIN_HOURLY_SOURCE_DIR}/Variable_temp_2m
+# - using daymean
+DAILY_OUTPUT_FILE=${OUTPUT_FOLDER}/tanzania_era5-land_daily_t2m-average_${YEAR}.nc
+cdo -L -b F64 -settime,00:00:00 -setunit,m.day-1 -daymean -selyear,${YEAR} -shifttime,-25min -selvar,t2m -mergetime ${HOURLY_SOURCE_DIR}/*${YEAR}*.nc ${HOURLY_SOURCE_DIR}/*${YEAR_PLUS_1}01.nc ${DAILY_OUTPUT_FILE} 
+
+# monthly temp_2m
+MONTHLY_UNIT="K"
+CDOMON_OPERA="monmean"
+MONTH_OUTPUT_FILE=${OUTPUT_FOLDER}/tanzania_era5-land_monthly_t2m-average_${YEAR}.nc
+CDO_TIMESTAT_DATE='last' cdo -L -settime,00:00:00 -setunit,${MONTHLY_UNIT} -${CDOMON_OPERA} ${DAILY_OUTPUT_FILE} ${MONTH_OUTPUT_FILE} 
+
 
 
 #~ # ssr, surface solar radiation
