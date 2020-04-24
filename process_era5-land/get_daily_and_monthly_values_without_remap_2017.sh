@@ -25,6 +25,15 @@ HOURLY_SOURCE_DIR=${MAIN_HOURLY_SOURCE_DIR}/Variable_tpre
 DAILY_OUTPUT_FILE=${OUTPUT_FOLDER}/tanzania_era5-land_daily_total-preci_${YEAR}.nc
 cdo -L -b F64 -settime,00:00:00 -setunit,m.day-1 -daymax -selyear,${YEAR}/${YEAR_PLUS_1} -shifttime,-25min -selvar,tp -mergetime ${HOURLY_SOURCE_DIR}/*${YEAR}*.nc ${HOURLY_SOURCE_DIR}/*${YEAR_PLUS_1}01.nc ${DAILY_OUTPUT_FILE} &
 
+# monthly tp, total precipitation
+MONTHLY_UNIT="m.month-1"
+CDOMON_OPERA="monsum"
+MONTH_OUTPUT_FILE=${OUTPUT_FOLDER}/tanzania_era5-land_monthly_total-preci_${YEAR}.nc
+CDO_TIMESTAT_DATE='last' cdo -L -settime,00:00:00 -setunit,${MONTHLY_UNIT} -${CDOMON_OPERA} ${DAILY_OUTPUT_FILE} ${MONTH_OUTPUT_FILE} 
+
+cdo -L -b F64 -settime,00:00:00 -setunit,m.day-1 -daymax -selyear,${YEAR}/${YEAR_PLUS_1} -shifttime,-25min -selvar,tp -mergetime ${HOURLY_SOURCE_DIR}/*${YEAR}*.nc ${HOURLY_SOURCE_DIR}/*${YEAR_PLUS_1}01.nc ${DAILY_OUTPUT_FILE}
+
+
 #~ # ssr, surface solar radiation
 #~ HOURLY_SOURCE_DIR=${MAIN_HOURLY_SOURCE_DIR}/Variable_Snsr
 #~ # - daily total, NOTE: using daymax (as hourly source data are accumulative on each day)
@@ -68,6 +77,6 @@ cdo -L -b F64 -settime,00:00:00 -setunit,m.day-1 -daymax -selyear,${YEAR}/${YEAR
 #~ # - mean
 #~ cdo -L -b F64 -settime,00:00:00 -setunit,m.s-1 -daymean -selyear,2000/2000 -shifttime,-25min -selvar,v10 -mergetime ${HOURLY_SOURCE_DIR}/*.nc ${OUTPUT_FOLDER}/tanzania_era5-land_daily_v10-average_2000-2000.nc &
 
-wait
+
 
 set +x
