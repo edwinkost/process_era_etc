@@ -3,8 +3,8 @@ set -x
 
 MAIN_HOURLY_SOURCE_DIR="/scratch-shared/edwinsu/era5-land_meteo/hourly/"
 
-YEAR=2017
-YEAR_PLUS_1=2018
+YEAR=2020
+YEAR_PLUS_1=2021
 
 OUTPUT_FOLDER="/scratch-shared/edwinsu/era5-land_meteo/without_remapcon/wind_speed_10m/"
 OUTPUT_FOLDER=${OUTPUT_FOLDER}/${YEAR}
