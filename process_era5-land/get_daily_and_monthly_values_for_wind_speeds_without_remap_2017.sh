@@ -8,7 +8,7 @@ OUTPUT_FOLDER=${OUTPUT_FOLDER}/${YEAR}
 HOURLY_SOURCE_DIR="/scratch/shared/edwinsu/era5-land_meteo/without_remapcon/wind_speed_10m/2017/tmp_era5-land_wind_speed_10m_2017.nc"
 # - using daymean
 DAILY_OUTPUT_FILE=${OUTPUT_FOLDER}/era5-land_daily_wind_speed_10m_2017.nc
-cdo -L -b F64 -settime,00:00:00 -daymean -selyear,${YEAR} ${HOURLY_SOURCE_DIR}/*${YEAR}*.nc ${DAILY_OUTPUT_FILE} 
+cdo -L -b F64 -settime,00:00:00 -daymean ${HOURLY_SOURCE_DIR}/*${YEAR}*.nc ${DAILY_OUTPUT_FILE} 
 
 # monthly
 CDOMON_OPERA="monmean"
