@@ -1,8 +1,7 @@
 
 set -x
 
-OUTPUT_FOLDER="/scratch-shared/edwinsu/era5-land_meteo/without_remapcon/wind_speed_10m/"
-OUTPUT_FOLDER=${OUTPUT_FOLDER}/${YEAR}
+OUTPUT_FOLDER="/scratch-shared/edwinsu/era5-land_meteo/without_remapcon/wind_speed_10m/2017/"
 
 HOURLY_SOURCE_FILE="/scratch/shared/edwinsu/era5-land_meteo/without_remapcon/wind_speed_10m/2017/hourly_tmp/tmp_era5-land_wind_speed_10m_2017.nc"
 
