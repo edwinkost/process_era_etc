@@ -3,8 +3,8 @@ set -x
 
 MAIN_HOURLY_SOURCE_DIR="/scratch-shared/edwinsu/era5-land_meteo/hourly/"
 
-YEAR=2020
-YEAR_PLUS_1=2021
+YEAR=2017
+YEAR_PLUS_1=2018
 
 OUTPUT_FOLDER="/scratch-shared/edwinsu/era5-land_meteo/without_remapcon/wind_speed_10m/"
 OUTPUT_FOLDER=${OUTPUT_FOLDER}/${YEAR}
@@ -31,26 +31,32 @@ mkdir -p ${OUTPUT_FOLDER}
 # - mergetime hourly u
 HOURLY_SOURCE_DIR_WIND_U=${MAIN_HOURLY_SOURCE_DIR}/Variable_10u/
 MERGE_OUTPUT_FILE_WIND_U=${OUTPUT_FOLDER}/tmp_era5-land_10u_${YEAR}.nc
-#~ cdo -L -b F64 -selyear,${YEAR} -shifttime,-25min -mergetime ${HOURLY_SOURCE_DIR_WIND_U}/*${YEAR}*.nc ${HOURLY_SOURCE_DIR_WIND_U}/*${YEAR_PLUS_1}01.nc ${MERGE_OUTPUT_FILE_WIND_U} &
-cdo -L -b F64 -selyear,${YEAR} -shifttime,-25min -mergetime ${HOURLY_SOURCE_DIR_WIND_U}/*${YEAR}*.nc ${MERGE_OUTPUT_FILE_WIND_U} &
+cdo -L -b F64 -selyear,${YEAR} -shifttime,-25min -mergetime ${HOURLY_SOURCE_DIR_WIND_U}/*${YEAR}*.nc ${HOURLY_SOURCE_DIR_WIND_U}/*${YEAR_PLUS_1}01.nc ${MERGE_OUTPUT_FILE_WIND_U} &
+
+#~ # - for testing with 2020 only
+#~ cdo -L -b F64 -selyear,${YEAR} -shifttime,-25min -mergetime ${HOURLY_SOURCE_DIR_WIND_U}/*${YEAR}*.nc ${MERGE_OUTPUT_FILE_WIND_U} &
 
 # - mergetime hourly v
 HOURLY_SOURCE_DIR_WIND_V=${MAIN_HOURLY_SOURCE_DIR}/Variable_10v/
 MERGE_OUTPUT_FILE_WIND_V=${OUTPUT_FOLDER}/tmp_era5-land_10v_${YEAR}.nc
-#~ cdo -L -b F64 -selyear,${YEAR} -shifttime,-25min -mergetime ${HOURLY_SOURCE_DIR_WIND_V}/*${YEAR}*.nc ${HOURLY_SOURCE_DIR_WIND_V}/*${YEAR_PLUS_1}01.nc ${MERGE_OUTPUT_FILE_WIND_V} &
-cdo -L -b F64 -selyear,${YEAR} -shifttime,-25min -mergetime ${HOURLY_SOURCE_DIR_WIND_V}/*${YEAR}*.nc ${MERGE_OUTPUT_FILE_WIND_V} &
+cdo -L -b F64 -selyear,${YEAR} -shifttime,-25min -mergetime ${HOURLY_SOURCE_DIR_WIND_V}/*${YEAR}*.nc ${HOURLY_SOURCE_DIR_WIND_V}/*${YEAR_PLUS_1}01.nc ${MERGE_OUTPUT_FILE_WIND_V} &
+
+#~ # - for testing with 2020
+#~ cdo -L -b F64 -selyear,${YEAR} -shifttime,-25min -mergetime ${HOURLY_SOURCE_DIR_WIND_V}/*${YEAR}*.nc ${MERGE_OUTPUT_FILE_WIND_V} &
+
 wait
 
 
 # cat hourly u and v
 MERGE_OUTPUT_FILE_WIND_HOURLY=${OUTPUT_FOLDER}/tmp_era5-land_10u-10v_${YEAR}.nc
-cdo -L -cat ${MERGE_OUTPUT_FILE_WIND_U} ${MERGE_OUTPUT_FILE_WIND_V} ${MERGE_OUTPUT_FILE_WIND_HOURLY}
+cdo -L -merge ${MERGE_OUTPUT_FILE_WIND_U} ${MERGE_OUTPUT_FILE_WIND_V} ${MERGE_OUTPUT_FILE_WIND_HOURLY}
 
  
 # calculate hourly wind speed (with expression)
 HOURLY_WIND_SPEED_OUTPUT_FILE=${OUTPUT_FOLDER}/tmp_era5-land_wind_speed_10m_${YEAR}.nc
-cdo -L -expr 'wind_speed_10m = sqrt(u10*u10 + v10*v10)' ${MERGE_OUTPUT_FILE_WIND_HOURLY} ${HOURLY_WIND_SPEED_OUTPUT_FILE} 
+cdo -L -setunit,"m.s-1" -expr,'wind_speed_10m = sqrt(u10*u10 + v10*v10)' ${MERGE_OUTPUT_FILE_WIND_HOURLY} ${HOURLY_WIND_SPEED_OUTPUT_FILE} 
 ncview ${HOURLY_WIND_SPEED_OUTPUT_FILE}
+
 
 # calculate daily values
 
