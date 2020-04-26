@@ -31,13 +31,14 @@ mkdir -p ${OUTPUT_FOLDER}
 # - mergetime hourly u
 HOURLY_SOURCE_DIR_WIND_U=${MAIN_HOURLY_SOURCE_DIR}/Variable_10u/
 MERGE_OUTPUT_FILE_WIND_U=${OUTPUT_FOLDER}/tmp_era5-land_10u_${YEAR}.nc
-cdo -L -b F64 -selyear,${YEAR} -shifttime,-25min -mergetime ${HOURLY_SOURCE_DIR_WIND_U}/*${YEAR}*.nc ${HOURLY_SOURCE_DIR_WIND_U}/*${YEAR_PLUS_1}01.nc ${MERGE_OUTPUT_FILE_WIND_U} &
+#~ cdo -L -b F64 -selyear,${YEAR} -shifttime,-25min -mergetime ${HOURLY_SOURCE_DIR_WIND_U}/*${YEAR}*.nc ${HOURLY_SOURCE_DIR_WIND_U}/*${YEAR_PLUS_1}01.nc ${MERGE_OUTPUT_FILE_WIND_U} &
+cdo -L -b F64 -selyear,${YEAR} -shifttime,-25min -mergetime ${HOURLY_SOURCE_DIR_WIND_U}/*${YEAR}*.nc ${MERGE_OUTPUT_FILE_WIND_U} &
 
 # - mergetime hourly v
-HOURLY_SOURCE_DIR_WIND_V=${MAIN_HOURLY_SOURCE_DIR}/Variable_10v
+HOURLY_SOURCE_DIR_WIND_V=${MAIN_HOURLY_SOURCE_DIR}/Variable_10v/
 MERGE_OUTPUT_FILE_WIND_V=${OUTPUT_FOLDER}/tmp_era5-land_10v_${YEAR}.nc
-cdo -L -b F64 -selyear,${YEAR} -shifttime,-25min -mergetime ${HOURLY_SOURCE_DIR_WIND_U}/*${YEAR}*.nc ${HOURLY_SOURCE_DIR_WIND_U}/*${YEAR_PLUS_1}01.nc ${MERGE_OUTPUT_FILE_WIND_U} &
-
+#~ cdo -L -b F64 -selyear,${YEAR} -shifttime,-25min -mergetime ${HOURLY_SOURCE_DIR_WIND_V}/*${YEAR}*.nc ${HOURLY_SOURCE_DIR_WIND_V}/*${YEAR_PLUS_1}01.nc ${MERGE_OUTPUT_FILE_WIND_V} &
+cdo -L -b F64 -selyear,${YEAR} -shifttime,-25min -mergetime ${HOURLY_SOURCE_DIR_WIND_V}/*${YEAR}*.nc ${MERGE_OUTPUT_FILE_WIND_V} &
 wait
 
 
